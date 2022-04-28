@@ -12,10 +12,9 @@ import Router from "next/router";
 import Link from "next/link";
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
-import tableStyles from "@/styles/Table.module.css"
+import styles from '@/styles/Nav.module.css'
 import MenuItem from '@mui/material/MenuItem';
 import { createSvgIcon } from '@mui/material/utils';
-import style from "@/styles/Nav.module.css";
 
 const HomeIcon = createSvgIcon(
   <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />,
@@ -23,7 +22,7 @@ const HomeIcon = createSvgIcon(
 );
 
 const pages = ['카운터', '계산기', 'BMI', '게시판'];
-const preSettings = ['회원가입', '로그인'];
+const preSettings = ['회원가입', '로그인', '프로필'];
 const postSettings = ['프로필', '정보수정', '로그아웃', '회원탈퇴'];
 
 export function Nav(){
@@ -36,7 +35,6 @@ export function Nav(){
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
-
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -47,9 +45,11 @@ export function Nav(){
 
   const handleCloseUserMenu = (value) => {
     switch(value) {
-      case '회원가입':  window.location.href='/user/join' 
+      case '회원가입': window.location.href='/auth/register' 
                       break;
-      case '로그인':  window.location.href='/user/login' 
+      case '로그인': window.location.href='/auth/login' 
+                      break;
+      case '프로필': window.location.href='/user/profile'
                       break;
       default: window.location.href='/'
                       break;
@@ -60,10 +60,10 @@ export function Nav(){
   useEffect(() => {
     const loginUser = localStorage.getItem("loginUser")
     if (loginUser === null) {
-      setUserUrls(["/user/userJoin","/user/userLogin"])
+      setUserUrls(["/auth/register","/auth/login"])
       setUserSubTitle(["회원가입","로그인"])
     } else {
-      setUserUrls(["/user/logout","/user/userProfile","/user/userModify","/user/userRemove","user/userList"])
+      setUserUrls(["/user/logout","/user/profile","/user/modifyUser","/user/delUser","user/getUsers"])
       setUserSubTitle(["로그아웃","프로필","회원수정","회원탈퇴","회원목록"])
     }
   }, [])
@@ -78,7 +78,7 @@ export function Nav(){
   const teamSubTitle = ["팀등록","팀목록","팀수정","팀삭제"]
   const boardUrls = ["/board/writeArticle","/board/getArticles","/board/modifyArticle","/board/removeArticle"]
   const boardSubTitle = ["글등록","글목록","글수정","글삭제"]
-
+  
   const handleClick = (value) => { 
     switch(value) {
       case '카운터':  window.location.href='/basic/counter' 
@@ -97,9 +97,11 @@ export function Nav(){
   const handleAuth = (value) => {
     alert('handleAuth '+value)
     switch(value) {
-      case '회원가입':  window.location.href='/user/userJoin' 
+      case '회원가입':  window.location.href='/auth/register' 
                       break;
-      case '로그인':  window.location.href='/user/userLogin' 
+      case '로그인':  window.location.href='/auth/login' 
+                      break;
+      case '프로필': window.location.href='/user/profile'
                       break;
       default: window.location.href='/'
                       break;
@@ -107,7 +109,7 @@ export function Nav(){
   }
 
   return (
-    <AppBar position="static" style={{marginBottom:"70px"}}>
+    <AppBar position="static" style={{marginBottom:"20px"}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
@@ -181,7 +183,6 @@ export function Nav(){
     </AppBar>
   );
 }
-
 const SubMenu = (props) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);

@@ -2,7 +2,6 @@ import db from '../models/index.js'
 import getDatabase from '../lambdas/getDatabase.js'
 
 export default function UserService() {
-
     const User = db.User
     const dbo = getDatabase()
     const dbConnect = dbo.getDb();
