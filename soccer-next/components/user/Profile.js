@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import Router from "next/router";
 import tableStyles from '@/styles/Table.module.css'
 
-export function Profile(){
+export function Profile({user}){
     return <form>
         <table>
             <thead>

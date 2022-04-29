@@ -2,6 +2,7 @@ import db from '../models/index.js'
 import getDatabase from '../lambdas/getDatabase.js'
 
 export default function UserService() {
+
     const User = db.User
     const dbo = getDatabase()
     const dbConnect = dbo.getDb();
@@ -13,7 +14,7 @@ export default function UserService() {
                     res
                         .status(500)
                         .send({message: err});
-                    console.log('회원가입 실패')
+                    console.log('회원가입 실패 : ' + err)
                     return;
                 } else {
                     res

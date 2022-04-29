@@ -25,8 +25,15 @@ app.post('/join', cors(corsOptions), (req, res) => {
     UserService().join(req, res)
 })
 app.post('/login', cors(corsOptions), (req, res) => {
+    console.log('login')
     UserService().login(req, res)
 })
+/**
+app.get('/profile', cors(corsOptions), (req, res) => {
+    console.log('profile')
+    UserService().getUserById(req.body.userid)
+})
+*/
 app.get(
     '/logout',
     passport.authenticate('jwt', {session: false}),
