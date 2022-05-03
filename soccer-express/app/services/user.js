@@ -14,7 +14,7 @@ export default function UserService() {
                     res
                         .status(500)
                         .send({message: err});
-                    console.log('회원가입 실패 : ' + err)
+                    console.log('회원가입 실패')
                     return;
                 } else {
                     res
@@ -106,6 +106,7 @@ export default function UserService() {
                 }) */
         },
         logout() {
+            console.log(`서버 로그아웃 `);
             req.logout();
             res.json({success: true, msg: '로그아웃'});
 

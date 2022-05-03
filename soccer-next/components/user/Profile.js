@@ -12,6 +12,8 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
+import styles from '@/styles/Profile.module.css';
+
 
 function Copyright(props) {
     return (
@@ -29,6 +31,7 @@ function Copyright(props) {
 const theme = createTheme();
 
 export function Profile({loginUser}) {
+    
     return (
         <ThemeProvider theme={theme}>
             <Container component="main" maxWidth="xs">
@@ -48,7 +51,7 @@ export function Profile({loginUser}) {
                         <LockOutlinedIcon/>
                     </Avatar>
                     <Typography component="h1" variant="h5">
-                        {loginUser.name}
+                    User Profile Card
                     </Typography>
                     <Box
                         component="form"
@@ -56,11 +59,11 @@ export function Profile({loginUser}) {
                         sx={{
                             mt: 1
                         }}
-                    >
+                       >
                         <h2
                             style={{
                                 textAlign: "center"
-                            }}>User Profile Card</h2>
+                            }}> </h2>
 
                         <div className="styles.card">
                             <img
@@ -70,13 +73,13 @@ export function Profile({loginUser}) {
                                     width: "100%"
                                 }}/>
                             <h1>
-                                ?
+                            {loginUser.name}
                             </h1>
                             <p className="title">CEO & Founder, Example</p>
-                            {/* <p>Email : {loginUser.email}</p>
-                            <p>Phone : {loginUser.phone}</p>
-                            <p>Birth : {loginUser.birth}</p>
-                            <p>Address : {loginUser.address}</p> */}
+                            <p>이메일 : {loginUser.email}</p>
+                            <p>전화번호 : {loginUser.phone}</p>
+                            <p>생년월일 : {loginUser.birth}</p>
+                            <p>주소 : {loginUser.address}</p>
                             <div
                                 style={{
                                     margin: "24px 0"

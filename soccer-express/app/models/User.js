@@ -16,10 +16,10 @@ export default function UserModel(mongoose) {
             token: String
         }, {timestamps: true})
         userSchema.pre("save", function (next) {
-            let user = this;
+            let user = this
             const saltRounds = 10
-            // model 안의 paswsword가 변환될때만 암호화
-            // if (user.isModified("password")) {
+            //model 안의 paswsword가 변환될때만 암호화
+            //if (user.isModified("password")) {
               bcrypt.genSalt(saltRounds, function (err, salt) {
                 if (err) return next(err);
                 bcrypt.hash(user.password, salt, function (err, hash) {
@@ -28,21 +28,21 @@ export default function UserModel(mongoose) {
                   next();
                 });
               });
-            // } else {
-            //   next();
-            // }
+            //} else {
+            //  next();
+            //}
           });
         userSchema.methods.comparePassword = function (plainPassword, cb) {
-            //cb는 (err,isMatch) 이다. plainPassword 유저가 입력한 password
+            //cb는 (err,isMatch)이다. plainPassword 유저가 입력한 password
             console.log(' >> plainPassword >> ' + plainPassword)
             console.log(' >> this.password >> ' + this.password)
             let isMatch = false
-            if (bcrypt.compare(plainPassword, this.password)) {
-                console.log(' >> plainPassword === this.password >> ')
+            if (plainPassword === this.password) {
+                console.log(' >> plainPassword===this.password >> ')
                 isMatch = true
             } else {
-                console.log(' >> plainPassword !== this.password >> ')
-                isMatch = false
+                console.log(' >> plainPassword !==this.password >> ')
+                isMatch = true
             }
             bcrypt.compare(plainPassword, this.password, function (err, _isMatch) {
                 if (err) {
@@ -54,6 +54,7 @@ export default function UserModel(mongoose) {
             })
         }
         userSchema.methods.generateToken = function (cb) {
+            
             var user = this;
             // json web token 이용하여 token 생성하기 user id 와 두번째 param 으로 토큰을 만들고, param 을 이용하여
             // 나중에 userid를 찾아낸다.

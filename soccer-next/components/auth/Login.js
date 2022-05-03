@@ -35,7 +35,7 @@ export function Login({onChange, onSubmit}){
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 8,
+            marginTop: 2,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -72,7 +72,7 @@ export function Login({onChange, onSubmit}){
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
-              label="로그인 정보 저장"
+              label="로그인정보저장"
             />
             <Button
               type="submit"
